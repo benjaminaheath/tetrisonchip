@@ -1,3 +1,4 @@
+
 class Tetromino:
 
     @classmethod
@@ -11,9 +12,9 @@ class Tetromino:
                 270: ((1,1), (1,2), (2,1), (2,2))
             },
             'l': { # this one is a bit different and might need a 2x4 matrix
-                0:   ((0,2), (1,2), (2,2), (2,3)),
+                0:   ((0,2), (1,2), (2,2), (3,2)),
                 90:  ((2,0), (2,1), (2,2), (2,3)),
-                180: ((0,2), (1,2), (2,2), (2,3)),
+                180: ((0,2), (1,2), (2,2), (3,2)),
                 270: ((2,0), (2,1), (2,2), (2,3))
             },
             's': {
@@ -52,6 +53,7 @@ class Tetromino:
 
         self.Shape = shape
         self.Rotation = 0
+        self.Texture = shape
 
     @classmethod
     def RotateRight(self)-> None:
@@ -78,7 +80,22 @@ class Tetromino:
         # Get initial 
         return self.Pieces[self.Shape][self.Rotation]
 
-    def __str__(self):
+    @classmethod
+    def __str__(self) -> str:
+        tile = [['.' for _ in range(4)] for _ in range(4)]
+        for v in self.GetVector(): 
+            tile[v[0]][v[1]] = self.Texture
+        rows = []
+        for r in tile:
+            rows.append(''.join(r))
+
+        return '\n'.join(rows)
+
+    @classmethod
+    def __repr__(self) -> str:
+        """
+        Return the vector representing the tiles of the piece
+        """
         vec = self.GetVector()
         return str(vec)
         
