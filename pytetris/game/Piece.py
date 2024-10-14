@@ -12,26 +12,37 @@ pieces = {
 }
 
 class Piece:
-    def __init__(self):
+    def __init__(self,n=None):
         """Initialise the piece"""
-        self.piece = pieces[random.randint(1,7)]
+        if not n: self.piece = pieces[random.randint(1,7)]
+        else:     self.piece = pieces[n]
 
-    def rotate(self):
-        """Rotate the piece"""
+    def RotateRight(self):
+        """Rotate the piece CW"""
         n = len(self.piece)
         copy_piece = copy.deepcopy(self.piece)
         for i in range(n):
             for j in range(n):
                 copy_piece[j][n-1-i] = self.piece[i][j]
         self.piece = copy_piece
+    
+    def RotateLeft(self):
+        """Rotate the piece CCW"""
+        n = len(self.piece)
+        copy_piece = copy.deepcopy(self.piece)
+        for i in range(n):
+            for j in range(n):
+                copy_piece[n-1-j][i] = self.piece[i][j]
+        self.piece = copy_piece
 
-    def render(self):
+
+    def Render(self):
         """Display the piece in text"""
         for row in self.piece:
             print(''.join('X' if col else ' ' for col in row))
         print()
     
-    def bottommost(self):
+    def Bottommost(self):
         """Calculate the bottom boundary for each piece column"""
         n = len(self.piece)
         bottom = [-1] * n
@@ -43,7 +54,7 @@ class Piece:
                 
         return bottom
 
-    def leftmost(self):
+    def Leftmost(self):
         """Calculate the left boundary for each piece row"""
         n = len(self.piece)
         left = [-1] * n
@@ -54,7 +65,7 @@ class Piece:
                     break
         return left
     
-    def rightmost(self):
+    def Rightmost(self):
         """Calculate the right boundary for each piece row"""
         n = len(self.piece)
         right = [-1] * n
