@@ -1,5 +1,6 @@
 default:
 	python3 game/Main.py
 
-debug:
-	python3 game/Main.py debug
+test:
+	PYTHONPATH=$(pwd) 
+	pytest tests
