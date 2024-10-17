@@ -1,7 +1,5 @@
 import pytest
-from game.Piece import Piece, pieces
-import random
-import copy
+from game import Piece, pieces
 
 @pytest.fixture
 def piece():
