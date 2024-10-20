@@ -1,4 +1,6 @@
-module lfsr (
+module lfsr #(
+    parameter SEED = 15'b1
+) (
     input clk,
     input nreset,
     output reg [14:0] out
@@ -9,7 +11,7 @@ module lfsr (
     assign tap2 = out[0] ^ out[14];
 
     always @(posedge clk or negedge nreset) begin
-        if(!nreset) out <= 15'b1;
+        if(!nreset) out <= SEED;
         else        out <= {out[12:0], tap1, tap2};
     end
 
