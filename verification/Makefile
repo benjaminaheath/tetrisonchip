@@ -4,13 +4,25 @@ VERIF := $(PROJ_ROOT)/verification
 
 BUILD := $(VERIF)/build
 SIM_OUTPUT := $(BUILD)/simulation
+SIM_FLAGS := -Wall -g2005-sv
 
-all: run
+LSFR_SRC := $(RTL)/controller/lfsr.v
+LSFR_TEST := $(VERIF)/test_lfst.v
 
-$(SIM_OUTPUT): $(RTL)/controller/lfsr.v $(VERIF)/test_lfsr.v
-	@clear
+PIECEGENERATOR_SRC := $(RTL)/controller/piecegenerator.v
+PIECEGENERATOR_SRC += $(LFSR_SRC)
+PIECEGENERATOR_TEST := $(VERIF)/test_piecegenerator.v
+
+.PHONY: all
+all: # disable the all flag
+
+lfsr: $(LSFR_SRC) $(LFSR_TEST)
 	@mkdir -p $(BUILD)
-	iverilog -Wall -o $@ $^
+	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
+
+piecegen: $(PIECEGENERATOR_SRC) $(PIECEGENERATOR_TEST)
+	@mkdir -p $(BUILD)
+	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
 
 run: $(SIM_OUTPUT)
 	vvp $(SIM_OUTPUT)
