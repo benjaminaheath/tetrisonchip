@@ -6,12 +6,12 @@ BUILD := $(VERIF)/build
 SIM_OUTPUT := $(BUILD)/simulation
 SIM_FLAGS := -Wall -g2012
 
-LFSR_SRC := $(RTL)/controller/lfsr.v
-LFSR_TEST := $(VERIF)/test_lfsr.v
+LFSR_SRC := $(RTL)/controller/lfsr.sv
+LFSR_TEST := $(VERIF)/test_lfsr.sv
 
-PIECEGEN_SRC := $(RTL)/controller/piecegenerator.v 
+PIECEGEN_SRC := $(RTL)/controller/piecegenerator.sv
 PIECEGEN_SRC += $(LFSR_SRC)
-PIECEGEN_TEST := $(VERIF)/test_piecegenerator.v
+PIECEGEN_TEST := $(VERIF)/test_piecegenerator.sv
 
 .PHONY: all
 all: # disable the all flag
