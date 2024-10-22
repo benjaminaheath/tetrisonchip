@@ -3,16 +3,19 @@ module lfsr #(
 ) (
     input logic clk,
     input logic nreset,
-    output logic [14:0] out
+    output logic out
 );
 
+    logic [14:0] bits;
+    assign out = bits[0];
+
     logic tap1, tap2;
-    assign tap1 = out[0] ^ out[13];
-    assign tap2 = out[0] ^ out[14];
+    assign tap1 = bits[0] ^ bits[13];
+    assign tap2 = bits[0] ^ bits[14];
 
     always_ff @(posedge clk or negedge nreset) begin
-        if(!nreset) out <= SEED;
-        else        out <= {out[12:0], tap1, tap2};
+        if(!nreset) bits <= SEED;
+        else        bits <= {bits[12:0], tap1, tap2};
     end
 
 endmodule
