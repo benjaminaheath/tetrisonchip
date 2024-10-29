@@ -2,9 +2,10 @@ module bag(
     input logic clk,
     input logic nreset,
     input logic newbag,
+    input logic newpiece,
     input logic [2:0] piece,
     output logic done,
-    output logic [2:0] bag [6:0]
+    output logic [20:0] bag
 );
 
     logic [6:0] bagflags;
@@ -16,9 +17,9 @@ module bag(
             bag <= '0;
             bagflags <= '0;
         end else begin
-            if (!bagflags[piece]) begin
+            if (piece != 3'b111 & bagflags[piece] == 0 & newpiece) begin
                 bagflags[piece] <= 1;
-                bag <= {piece,bag[5:0]};
+                bag <= {piece,bag[20:3]};
             end
         end
     end

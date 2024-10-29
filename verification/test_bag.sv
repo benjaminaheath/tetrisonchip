@@ -3,36 +3,27 @@ module test_bag;
     logic clk;
     logic nreset;
     logic newbag;
+    logic newpiece;
     logic [2:0] piece;
     logic done;
-    logic [2:0] bag [6:0];
+    logic [20:0] bag;
 
     bag bag0(
         .clk(clk),
         .nreset(nreset),
         .newbag(newbag),
+        .newpiece(newpiece),
         .piece(piece),
         .done(done),
         .bag(bag));
     
     logic [6:0] test_flags;
 
-    function automatic string get_bag_string(logic [2:0] bag);
-        string bag_string = "";
-
-        foreach (bag[i])
-            if(i!=6) bag_string = {bag_string, $sformatf("%0d,",bag[i])};
-            else bag_string = {bag_string, $sformatf("%0d",bag[i])};
-
-        return bag_string;
-    endfunction
-
     task automatic drive_piece(
-        logic [2:0] piece, 
-        logic [6:0] flags);
-
-        piece = i;
-        flags[i] = piece;
+        logic [2:0] new_piece);
+        
+        piece = new_piece;
+        newpiece = 1;
         #10;
     endtask
 
@@ -44,19 +35,25 @@ module test_bag;
             bag0.bagflags, flags);
     endtask
 
-    always #10 clk = ~clk;
+    always #5 clk = ~clk;
+
+    initial begin
+        $monitor("Time: %0t |\nNewbag: %b | Newpiece: %b | Done: %b |\nPiece: %d (%b) | Bag %b |\nFlags %b | test_flags %b",
+            $time, newbag, newpiece, done, piece, piece, bag, bag0.bagflags, test_flags);
+    end
 
     initial begin
         clk = 0;
         nreset = 1;
         newbag = 0;
         piece = 0;
+        newpiece = 0;
 
-        #5
-        nreset = 1;
+        #10
+        nreset = 0;
         
         #5
-        nreset = 0;
+        nreset = 1;
 
         // Assert bag is emptied
         assert(bag == '0)
@@ -69,10 +66,12 @@ module test_bag;
         else $error("Done flag not lowered at start");
         
         test_flags = '0;
-        for(int i = 0; i < 8; i++) begin
-            drive_piece(i, flags);
-            check_piece(flags);
+        for(int i = 7; i >= 0 ; i--) begin
+            drive_piece(i);
+            test_flags[i] = 1;
+            check_piece(test_flags);
         end
+        newpiece = 0;
 
         // Assert all flags have been raised
         assert(bag0.bagflags == 7'b1111111)
@@ -87,7 +86,7 @@ module test_bag;
         //            done);
 
         // Assert bag is as expected
-        assert(bag == {6,5,4,3,2,1,0})
+        assert(bag == {3'd0,3'd1,3'd2,3'd3,3'd4,3'd5,3'd6})
         else $error("Bag is not {6,5,4,3,2,1,0}");
         //else $error("Bag (%s) != {6,5,4,3,2,1,0}",
         //    get_bag_string(bag));
@@ -106,7 +105,9 @@ module test_bag;
         // Assert done flag is lowered after reset
         assert(!done)
         else $error("Done flag not lowered after reset");
-        $stop("Everything passed.");
+        
+        $display("End of test_bag.sv.");
+        $finish;
     end
 
 endmodule
