@@ -9,9 +9,14 @@ SIM_FLAGS := -Wall -g2012
 LFSR_SRC := $(RTL)/controller/lfsr.sv
 LFSR_TEST := $(VERIF)/test_lfsr.sv
 
-PIECEGEN_SRC := $(RTL)/controller/piecegenerator.sv
-PIECEGEN_SRC += $(LFSR_SRC)
-PIECEGEN_TEST := $(VERIF)/test_piecegenerator.sv
+BAG_SRC := $(RTL)/controller/bag.sv
+BAG_TEST := $(VERIF)/test_bag.sv
+
+RANDOMBAG_SRC := $(RTL)/controller/randombag.sv
+RANDOMBAG_SRC += $(LFSR_SRC)
+RANDOMBAG_SRC += $(BAG_SRC)
+RANDOMBAG_TEST := $(VERIF)/test_randombag.sv
+
 
 .PHONY: all
 all: # disable the all flag
@@ -20,7 +25,11 @@ lfsr: $(LFSR_SRC) $(LFSR_TEST)
 	@mkdir -p $(BUILD)
 	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
 
-piecegen: $(PIECEGEN_SRC) $(PIECEGEN_TEST)
+bag: $(BAG_SRC) $(BAG_TEST)
+	@mkdir -p $(BUILD)
+	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
+
+randombag: $(RANDOMBAG_SRC) $(RANDOMBAG_TEST)
 	@mkdir -p $(BUILD)
 	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
 

@@ -4,7 +4,7 @@ module bag(
     input logic newbag,
     input logic [2:0] piece,
     output logic done,
-    output logic [20:0] bag,
+    output logic [2:0] bag [6:0]
 );
 
     logic [6:0] bagflags;
@@ -18,7 +18,7 @@ module bag(
         end else begin
             if (!bagflags[piece]) begin
                 bagflags[piece] <= 1;
-                bag <= {piece,bag[17:0]};
+                bag <= {piece,bag[5:0]};
             end
         end
     end
