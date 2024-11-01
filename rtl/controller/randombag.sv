@@ -31,13 +31,12 @@ module randombag (
             .bag(pieces)
         );
 
-    always_ff @(posedge clk, negedge nreset) begin
-        if(!nreset) begin
+    always_latch @(clk, nreset, ready) begin
+        if(!nreset | ready) begin
             newpiece <= 0;
         end else begin
-            if(ready)        newpiece <= 0;
-            else if(newbag) newpiece <= 1;
-            else            newpiece <= 0;
+            if(newbag | ready)
+                newpiece <= 1;
         end
     end
 

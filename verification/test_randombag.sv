@@ -15,8 +15,6 @@ module test_randombag;
         .pieces(pieces)
     );
 
-    always #5 clk = ~clk;
-
     task automatic get_new_bag;
         // kick off a new bag generation
         newbag = 1;
@@ -36,9 +34,12 @@ module test_randombag;
             $time, newbag, ready, pieces);
     end 
 
+    always #5 clk = ~clk;
+
     initial begin
         clk = 0;
         nreset = 1;
+        newbag = 0;
         file = $fopen("/tmp/piecesgen.csv");
 
         #5
@@ -53,6 +54,12 @@ module test_randombag;
 
         $fclose(file);
         $finish;
+    end
+
+    initial begin
+        #100000 
+        $error("Reached 100,000 ticks, ending.");
+        $fatal;
     end
 
 endmodule
