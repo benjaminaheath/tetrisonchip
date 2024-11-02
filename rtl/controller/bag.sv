@@ -13,7 +13,7 @@ module bag(
     assign done = &bagflags;
 
     always_ff @(posedge clk, posedge newbag, negedge nreset) begin
-        if (!nreset | newbag) begin
+        if (!nreset or newbag) begin
             bag <= '0;
             bagflags <= '0;
         end else begin
