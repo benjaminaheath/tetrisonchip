@@ -12,8 +12,8 @@ LFSR_TEST := $(VERIF)/test_lfsr.sv
 BAG_SRC := $(RTL)/controller/bag.sv
 BAG_TEST := $(VERIF)/test_bag.sv
 
-MEMORY_SRC := $(RTL)/memory.sv
-MEMORY_TEST := $(VERIF)/test_board.sv
+BOARD_MEM_SRC := $(RTL)/board_mem.sv
+BOARD_MEM_TEST := $(VERIF)/test_board.sv
 
 
 RANDOMBAG_SRC := $(RTL)/controller/randombag.sv
@@ -33,7 +33,7 @@ bag: $(BAG_SRC) $(BAG_TEST)
 	@mkdir -p $(BUILD)
 	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
 
-memory: $(MEMORY_SRC) $(MEMORY_TEST)
+board_mem: $(BOARD_MEM_SRC) $(BOARD_MEM_TEST)
 	@mkdir -p $(BUILD)
 	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
 

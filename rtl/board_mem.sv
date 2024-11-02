@@ -1,5 +1,4 @@
-//`include "/package/memory_p.sv"
-module board(
+module board_mem(
     input logic clk,
     input logic wnr,
     input logic [4:0] rowid,

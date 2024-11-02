@@ -1,8 +1,9 @@
+`include "include/part.sv"
 module chip(
 
 );
 
-board prev_state(.*);
-board curr_state(.*);
+board_mem prev_state(.*);
+board_mem curr_state(.*);
 
 endmodule
