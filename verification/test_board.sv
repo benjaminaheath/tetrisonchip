@@ -7,7 +7,7 @@ module test_board;
     logic [19:0] out;
     logic [4:0] i;
 
-    board board (
+    board_mem board (
         .clk(clk),
         .wnr(wnr),
         .reset_n(reset_n),

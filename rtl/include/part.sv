@@ -1,0 +1,6 @@
+`include "../board_mem.sv"
+`include "../controlller/bag.sv"
+`include "../controlller/controller.sv"
+`include "../controlller/lfsr.sv"
+`include "../controlller/randombag.sv"
+`include "../controlller/tetrominos.sv"
