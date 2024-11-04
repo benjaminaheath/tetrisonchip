@@ -8,15 +8,15 @@ module randombag (
     logic newpiece;
     logic [2:0] piecebits;
 
-    lfsr # (.SEED(15'h2A5)) bitgen0 (
+    lfsr # (.SEED(15'd1)) bitgen0 (
             .clk(clk), 
             .nreset(nreset), 
             .out(piecebits[0]));
-    lfsr # (.SEED(15'h6B5)) bitgen1 (
+    lfsr # (.SEED(15'd15)) bitgen1 (
             .clk(clk), 
             .nreset(nreset), 
             .out(piecebits[1]));
-    lfsr # (.SEED(15'hDB7)) bitgen2 (
+    lfsr # (.SEED(15'd31)) bitgen2 (
             .clk(clk), 
             .nreset(nreset), 
             .out(piecebits[2]));
@@ -28,15 +28,19 @@ module randombag (
             .newpiece(newpiece),
             .piece(piecebits),
             .done(ready),
-            .bag(pieces)
-        );
+            .bag(pieces));
 
-    always_latch @(clk, nreset, ready) begin
-        if(!nreset | ready) begin
+    //an internal register to clock in the 'newpiece' signal
+    //hold the newpiece signal high from clock edge until done
+    always_ff @(posedge clk, negedge nreset, posedge ready) begin
+        if(!nreset) begin
             newpiece <= 0;
         end else begin
-            if(newbag | ready)
+            if(newbag & !newpiece) begin
                 newpiece <= 1;
+            end else if(ready) begin
+                newpiece <= 0;
+            end
         end
     end
 
