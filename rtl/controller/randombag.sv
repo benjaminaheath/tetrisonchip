@@ -1,4 +1,8 @@
-module randombag (
+module randombag #(
+    parameter SEED1 = 15'd1;
+    parameter SEED2 = 15'd15;
+    parameter SEED3 = 15'd31;
+) (
     input logic clk,
     input logic nreset,
     input logic newbag,
@@ -8,15 +12,15 @@ module randombag (
     logic newpiece;
     logic [2:0] piecebits;
 
-    lfsr # (.SEED(15'd1)) bitgen0 (
+    lfsr # (.SEED(SEED1)) bitgen0 (
             .clk(clk), 
             .nreset(nreset), 
             .out(piecebits[0]));
-    lfsr # (.SEED(15'd15)) bitgen1 (
+    lfsr # (.SEED(SEED2)) bitgen1 (
             .clk(clk), 
             .nreset(nreset), 
             .out(piecebits[1]));
-    lfsr # (.SEED(15'd31)) bitgen2 (
+    lfsr # (.SEED(SEED3)) bitgen2 (
             .clk(clk), 
             .nreset(nreset), 
             .out(piecebits[2]));
