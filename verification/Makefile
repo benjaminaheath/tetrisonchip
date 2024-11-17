@@ -4,7 +4,7 @@ RTL := $(PROJ_ROOT)/rtl# RTL Root Directory
 VERIF := $(PROJ_ROOT)/verification# Verification Root Directory
 
 SIM := verilator		# Use Verilator as Simulator
-SIM_FLAGS := -Wall --cc --sv --exe 	# Default flags: All warnings, c++ output, sv, executable output
+SIM_FLAGS := -Wall --cc --sv --exe --timing  # Default flags: All warnings, c++ output, sv, executable output
 TRACE ?= True			# Traceable output is optional, default true
 ifeq ($(TRACE), True)
 	$(SIM_FLAGS) += --trace # If trace not disabled, append --trace flag
@@ -30,6 +30,8 @@ RANDOMBAG_TEST := $(VERIF)/test_randombag.sv
 BOARD_MEM_SRC := $(RTL)/board_mem.sv
 BOARD_MEM_TEST := $(VERIF)/test_board.sv
 
+IC_SRC := $(RTL)/controller/interrupt_controller.sv
+IC_TEST := $(VERIF)/test_interrupt_controller.sv
 
 .PHONY: all
 all: # disable the all flag
@@ -46,6 +48,11 @@ bag: $(BAG_SRC) $(BAG_TEST)
 	@$(BUILD)/$@
 
 board_mem: $(BOARD_MEM_SRC) $(BOARD_MEM_TEST)
+	@mkdir -p $(BUILD)
+	$(SIM) $(SIM_FLAGS) -o $(BUILD)/$@ $^
+	@$(BUILD)/$@
+
+ic: $(IC_SRC) $(IC_TEST)
 	@mkdir -p $(BUILD)
 	$(SIM) $(SIM_FLAGS) -o $(BUILD)/$@ $^
 	@$(BUILD)/$@

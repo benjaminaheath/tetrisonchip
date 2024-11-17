@@ -1,6 +1,6 @@
 module bag(
     input logic clk,
-    input logic nreset,
+    input logic reset_n,
     input logic newbag,
     input logic newpiece,
     input logic [2:0] piece,
@@ -12,8 +12,8 @@ module bag(
 
     assign done = &bagflags;
 
-    always_ff @(posedge clk, posedge newbag, negedge nreset) begin
-        if (!nreset or newbag) begin
+    always_ff @(posedge clk, posedge newbag, negedge reset_n) begin
+        if (!reset_n | newbag) begin
             bag <= '0;
             bagflags <= '0;
         end else begin
