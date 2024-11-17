@@ -38,3 +38,4 @@ always@(inputs)
     endcase
 
 endmodule
+

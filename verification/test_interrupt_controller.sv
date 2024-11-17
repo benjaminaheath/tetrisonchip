@@ -1,4 +1,4 @@
-module test_ic;
+module test_interrupt_controller;
     logic left;
     logic right;
     logic down;
