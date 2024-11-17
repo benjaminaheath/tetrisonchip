@@ -54,7 +54,8 @@ board_mem: $(BOARD_MEM_SRC) $(BOARD_MEM_TEST)
 
 ic: $(IC_SRC) $(IC_TEST)
 	@mkdir -p $(BUILD)
-	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
+	$(SIM) $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
+	@$(BUILD)/$@
 
 randombag: $(RANDOMBAG_SRC) $(RANDOMBAG_TEST)
 	@mkdir -p $(BUILD)
