@@ -15,6 +15,8 @@ BAG_TEST := $(VERIF)/test_bag.sv
 BOARD_MEM_SRC := $(RTL)/board_mem.sv
 BOARD_MEM_TEST := $(VERIF)/test_board.sv
 
+IC_SRC := $(RTL)/controller/interrupt_controller.sv
+IC_TEST := $(VERIF)/test_interrupt_controller.sv
 
 RANDOMBAG_SRC := $(RTL)/controller/randombag.sv
 RANDOMBAG_SRC += $(LFSR_SRC)
@@ -34,6 +36,10 @@ bag: $(BAG_SRC) $(BAG_TEST)
 	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
 
 board_mem: $(BOARD_MEM_SRC) $(BOARD_MEM_TEST)
+	@mkdir -p $(BUILD)
+	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
+
+ic: $(IC_SRC) $(IC_TEST)
 	@mkdir -p $(BUILD)
 	iverilog $(SIM_FLAGS) -o $(SIM_OUTPUT) $^
 

@@ -1,7 +1,7 @@
 module test_bag;
 
     logic clk;
-    logic nreset;
+    logic reset_n;
     logic newbag;
     logic newpiece;
     logic [2:0] piece;
@@ -10,7 +10,7 @@ module test_bag;
 
     bag bag0(
         .clk(clk),
-        .nreset(nreset),
+        .reset_n(reset_n),
         .newbag(newbag),
         .newpiece(newpiece),
         .piece(piece),
@@ -44,16 +44,16 @@ module test_bag;
 
     initial begin
         clk = 0;
-        nreset = 1;
+        reset_n = 1;
         newbag = 0;
         piece = 0;
         newpiece = 0;
 
         #10
-        nreset = 0;
+        reset_n = 0;
         
         #5
-        nreset = 1;
+        reset_n = 1;
 
         // Assert bag is emptied
         assert(bag == '0)

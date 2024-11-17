@@ -1,6 +1,7 @@
 module controller (
     input logic clk,
-    input logic nreset
+    input logic reset_n,
+    input logic interrupt
 );
     logic newbag;
     logic ready;
@@ -9,7 +10,7 @@ module controller (
 
     randombag bag1 (
         .clk(clk),
-        .nreset(nreset),
+        .reset_n(reset_n),
         .newbag(newbag),
         .ready(ready),
         .pieces(pieces)

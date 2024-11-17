@@ -1,6 +1,6 @@
 module test_randombag;
     logic clk;
-    logic nreset;
+    logic reset_n;
     logic newbag;
     logic ready;
     logic [20:0] pieces;
@@ -9,7 +9,7 @@ module test_randombag;
 
     randombag ranbag0 (
         .clk(clk),
-        .nreset(nreset),
+        .reset_n(reset_n),
         .newbag(newbag),
         .ready(ready),
         .pieces(pieces)
@@ -48,15 +48,15 @@ module test_randombag;
 
     initial begin
         clk = 0;
-        nreset = 1;
+        reset_n = 1;
         newbag = 0;
         file = $fopen("/tmp/piecesgen.csv");
 
         #5
-        nreset = 0;
+        reset_n = 0;
 
         #5
-        nreset = 1;
+        reset_n = 1;
 
 
         n_bags = 10000;
