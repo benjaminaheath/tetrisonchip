@@ -1,4 +1,3 @@
-# TETRIS ON CHIP
-## A testing repo for Tetris on Chip TinyTapeout Project
+# TETRIS ON CHIP ASIC
 
-This is a testing repository for experiments in the Tetris-on-Chip (ToC) Project
+Repository for Tetris-on-Chip ASIC Project
