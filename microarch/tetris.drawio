@@ -210,7 +210,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Game Microarchitecture" id="JbcvkeVzZtVdxzbKchhx">
-    <mxGraphModel dx="3264" dy="1849" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="2448" dy="1387" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="1HzYq9Zqote-EY8_WfJj-0" />
         <mxCell id="1HzYq9Zqote-EY8_WfJj-1" parent="1HzYq9Zqote-EY8_WfJj-0" />
@@ -2050,7 +2050,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="R90fmlSOUcbIUeBVwLRw-483" parent="1HzYq9Zqote-EY8_WfJj-1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 32px;&quot;&gt;Random Sequence Generator FSM, Data, Control&lt;/font&gt;&lt;/h1&gt;" vertex="1">
-          <mxGeometry height="50" width="785.5" x="1234.5" y="2520" as="geometry" />
+          <mxGeometry height="40" width="765.5" x="1234.5" y="2520" as="geometry" />
         </mxCell>
         <mxCell id="R90fmlSOUcbIUeBVwLRw-623" edge="1" parent="1HzYq9Zqote-EY8_WfJj-1" source="R90fmlSOUcbIUeBVwLRw-485" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="R90fmlSOUcbIUeBVwLRw-486" value="">
           <mxGeometry relative="1" as="geometry" />
@@ -2461,6 +2461,9 @@
         </mxCell>
         <mxCell id="6j5tLzCrNCvyVhkYP9EB-4" parent="1HzYq9Zqote-EY8_WfJj-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div align=&quot;left&quot;&gt;The Piece Selection FSM should:&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;ul&gt;&lt;li&gt;Wrap a count from 0-6&lt;/li&gt;&lt;li&gt;Alternate bags&lt;/li&gt;&lt;li&gt;Assert bag new sequence on startup for both&lt;/li&gt;&lt;li&gt;Assert bag new sequence when finishing previous bag&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="140" width="210" x="79.5" y="2594.82" as="geometry" />
+        </mxCell>
+        <mxCell id="6j5tLzCrNCvyVhkYP9EB-5" parent="1HzYq9Zqote-EY8_WfJj-1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 32px;&quot;&gt;Row Clear, Gameover, Scoring Datapaths&lt;/font&gt;&lt;/h1&gt;" vertex="1">
+          <mxGeometry height="50" width="785.5" x="2400" y="2510" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
